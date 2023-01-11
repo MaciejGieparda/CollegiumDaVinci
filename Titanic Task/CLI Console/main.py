@@ -1,7 +1,5 @@
 import pandas as pd
 import typer
-import csv
-import pandas
 
 app = typer.Typer()
 
