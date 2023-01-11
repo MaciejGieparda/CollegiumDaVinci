@@ -41,7 +41,7 @@ results - folder with dataset that is used by CLI program<br/>
 
 Project is mainly an outcome for a review and doesn't need to be edited for the future purposes.<br/>
 
-Answers are described on medium post<br/>
+Answers are described on medium post https://medium.com/@DataThinker/how-to-survive-titanic-da539c5916d3<br/>
 
 ### Author <a name="paragraph4"></a>
 
