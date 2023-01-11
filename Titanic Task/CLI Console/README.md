@@ -1,4 +1,4 @@
-# Starbucks Capstone Project
+# Titanic Survivors Analysis - Capstone Project
 
 # Table of contents
 1. [Installation](#introduction)
@@ -9,45 +9,32 @@
 
 ### Installation <a name="introduction"></a>
 
+Download the file and call the file in console command.<br/>
+
 **Libraries:**<br/>
-matplotlib  3.5.1<br/>
-numpy       1.21.2<br/>
-pandas      1.4.1<br/>
-scipy       1.7.3<br/>
-seaborn     0.11.2<br/>
-json        2.0.9<br/>
-sklearn     1.0.2<br/>
-re          2.2.1<br/>
-
-
-**Tools:**<br/>
-IPython             7.29.0<br/>
-jupyter_client      7.1.0<br/>
-jupyter_core        4.9.1<br/>
-jupyterlab          3.2.1<br/>
-notebook            6.4.6<br/>
+click	8.1.3<br/>
+numpy	1.24.1<br/>
+pandas	1.5.2<br/>
+pip	22.2.1<br/>
+python-dateutil	2.8.2<br/>
+pytz	2022.7<br/>
+setuptools	63.2.0<br/>
+six	1.16.0<br/>
+typer	0.7.0<br/>
 
 ### Project Motivation <a name="paragraph1"></a>
 
-The project above is a capstone project for Data Science Nanodegree on uDacity. The main idea of this project is to learn the foundations of data science and communicating with stakeholders.
-
-The main question asked here is to find the most important factor for completition of the offer, but also to answer three questions: <br/>
-1. How looks distribution of genders among Starbucks App Users?<br/>
-2. How does an income distribution looks like among Starbucks App Users?<br/>
-3. How does age distribution looks like among Starbucks App Users?<br/>
+The project above is a finall project of Introduction to Python Classes on Collegium Da Vinci for students of first year of Data Science studies (B.A.). It is one out of two files that are needed. The main goal of this part is to explore the merged dataset of Titanic Survivors.<br/>
 
 ### File Descriptions <a name="paragraph2"></a>
 
-Starbucks_Capstone_notebook.ipynb - main Jupyter Notebook<br/>
-portfolio, profile, transcript (json files) - data sources<br/>
+main.py - simple CLI program<br/>
+final_results.csv - data sources<br/>
 
 ### Interaction <a name="paragraph3"></a>
 
-Project is mainly an outcome for a review and doesn't need to be edited for the future purposes. 
-The description of the results are on this medium post - https://medium.com/@DataThinker/which-factor-makes-starbucks-offers-succesful-31aa82e9449a
+To access the program, You need to download the data and py files. Then access it by comamand line.
 
 ### Author <a name="paragraph4"></a>
 
 Maciej Gieparda
-
-##### Credits to uDacity for giving an intro to the topic, and of course - stackoverflow :D
