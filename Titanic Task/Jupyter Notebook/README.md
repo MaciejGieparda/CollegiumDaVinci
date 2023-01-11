@@ -1,4 +1,4 @@
-# Starbucks Capstone Project
+# Titanic Analysis Capstone Project
 
 # Table of contents
 1. [Installation](#introduction)
