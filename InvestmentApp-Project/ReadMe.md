@@ -14,8 +14,7 @@ To get this project up and running locally, you'll need to follow these steps:
 **Libraries:**
 This application is written in Python and requires Python 3.8 or above. The necessary libraries are listed in the `requirements.txt` file. They can be installed by running the following command:
 
-
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 **Tools:**  
 - Flask: A lightweight WSGI web application framework.
@@ -38,7 +37,7 @@ The InvestmentApp is designed to provide users with an interactive platform to e
 ### Interaction <a name="interaction"></a>
 To run the application, use the following command:
 
-python app.py
+`python app.py`
 
 Once the server starts, you can visit `http://127.0.0.1:5000/` in your web browser to interact with the application.
 
