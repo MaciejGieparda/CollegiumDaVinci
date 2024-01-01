@@ -1,0 +1,54 @@
+<style>
+table {
+    width: 100%;
+    table-layout: auto;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    min-width: 80px;
+}
+
+@media screen and (max-width: 768px) {
+    th, td {
+        font-size: 0.9em;
+    }
+}
+
+tr:nth-child(even){background-color: #f9f9f9;}
+tr:hover {background-color: #ddd;}
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Current Price</th>
+            <th>Predicted Price (7 days)</th>
+            <th>Predicted Price (30 days)</th>
+            <th>Predicted Price (365 days)</th>
+            <th>7 Day % Change</th>
+            <th>30 Day % Change</th>
+            <th>365 Day % Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prediction in predictions %}
+            <tr>
+                <td>{{ prediction.symbol }}</td>
+                <td>{{ prediction.current_price }}</td>
+                <td>{{ prediction['7_days'] }}</td>
+                <td>{{ prediction['30_days'] }}</td>
+                <td>{{ prediction['365_days'] }}</td>
+                <td>{{ prediction['7_days_diff'] }}%</td>
+                <td>{{ prediction['30_days_diff'] }}%</td>
+                <td>{{ prediction['365_days_diff'] }}%</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

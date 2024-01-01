@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Investment App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #plotly-chart, #result {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #result-wrapper {
+        overflow-x: auto;
+        overflow-y: auto;
+        }
+                table {
+            width: 100%;
+            table-layout: auto; /* Changed from fixed to auto to allow dynamic column widths */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px; /* Adjust padding as needed */
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal; /* Changed from nowrap to normal to allow text wrapping */
+            min-width: 80px; /* Example minimum width */
+        }
+
+        /* Optional: Responsive font size */
+        @media screen and (max-width: 768px) {
+            th, td {
+                font-size: 0.9em; /* Smaller font size on smaller screens */
+            }
+        }
+
+
+        #prediction-results {
+            overflow-x: auto;
+            overflow-y: auto;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Investment App</h1>
+    <form action="/get_data" method="post">
+        <label for="name">Name:</label>
+        <select name="name" id="name">
+            <option value="">All</option>
+            {% for name in filters['Names'] %}
+                <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="country">Country:</label>
+        <select name="country" id="country">
+            <option value="">All</option>
+            {% for country in filters['Countries'] %}
+                <option value="{{ country }}">{{ country }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="sector">Sector:</label>
+        <select name="sector" id="sector">
+            <option value="">All</option>
+            {% for sector in filters['Sectors'] %}
+                <option value="{{ sector }}">{{ sector }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="industry">Industry:</label>
+        <select name="industry" id="industry">
+            <option value="">All</option>
+            {% for industry in filters['Industries'] %}
+                <option value="{{ industry }}">{{ industry }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="amount">Number of Results:</label>
+        <input type="number" name="amount" id="amount" value="10">
+
+        <button type="submit">Get Data</button>
+    </form>
+
+    <div id="plotly-chart"></div>
+    <div id="result"></div>
+
+    <button id="predict-button" style="display:none;">Predict Stock Prices</button>
+
+    <div id="prediction-results"></div>
+
+    <script>
+        $(document).ready(function(){
+            $('form').on('submit', function(event){
+            event.preventDefault();
+    $.ajax({
+        data : {
+            name : $('#name').val(),
+            country : $('#country').val(),
+            sector : $('#sector').val(),
+            industry : $('#industry').val(),
+            amount : $('#amount').val()
+        },
+        type : 'POST',
+        url : '/get_data',
+        success: function(data) {
+            $('#plotly-chart').html(data.plot_html);
+            $('#result').html(data.html_table);
+            symbolsForPrediction = data.symbols;
+
+            if(data.html_table) {
+                $('#predict-button').show();
+            }
+        },
+        error: function(error) {
+            console.log('Error:', error);
+        }
+    });
+});
+
+        $('#predict-button').click(function() {
+            console.log("Predict button clicked. Sending symbols:", symbolsForPrediction);
+
+            $.ajax({
+                type: 'POST',
+                url: '/predict_prices',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    symbols: symbolsForPrediction
+                }),
+                success: function(response) {
+                    console.log("Prediction successful. Response:", response);
+                    $('#prediction-results').html(response.predictions_html);
+                },
+                error: function(xhr, status, error) {
+                    console.log("AJAX error in prediction:", error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
